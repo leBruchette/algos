@@ -91,14 +91,10 @@ func TestMergeSortWithComparator(t *testing.T) {
 	charlie := Person{Name: "Charlie", Dob: time.Date(2000, time.July, 20, 0, 0, 0, 0, time.UTC)}
 	eve := Person{Name: "Eve", Dob: time.Date(1988, time.April, 10, 0, 0, 0, 0, time.UTC)}
 
-	dobComparator := func(a, b Person) bool {
-		return a.Dob.After(b.Dob)
-	}
-
 	data := []Person{bob, frank, alice, diana, charlie, eve}
 	expected := []Person{bob, eve, alice, frank, diana, charlie}
 
-	MergeSortWithComparator(data, dobComparator)
+	MergeSortWithComparator(data, PersonComparator{})
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)
