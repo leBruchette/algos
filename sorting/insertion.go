@@ -16,13 +16,6 @@ func InsertionSortWithComparator[T any](data []T, comparator func(a, b T) bool) 
 	sort[T](data, comparator)
 }
 
-// defaultComparator provides a default comparator for ordered types.
-func defaultComparator[T constraints.Ordered]() func(a, b T) bool {
-	return func(a, b T) bool {
-		return a > b
-	}
-}
-
 // sort is the core implementation of the insertion sort algorithm.
 // It iterates through the slice, and for each element, it places it in its correct position
 // relative to the already sorted portion of the slice, using the provided comparator.
