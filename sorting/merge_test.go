@@ -6,84 +6,84 @@ import (
 	"time"
 )
 
-func TestInsertionSortWithInts(t *testing.T) {
+func TestMergeSortWithInts(t *testing.T) {
 	data := []int{5, 2, 9, 1, 5, 6}
 	expected := []int{1, 2, 5, 5, 6, 9}
 
-	InsertionSort(data)
+	MergeSort(data)
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)
 	}
 }
 
-func TestInsertionSortWithSingleInt(t *testing.T) {
+func TestMergeSortWithSingleInt(t *testing.T) {
 	data := []int{5}
 	expected := []int{5}
 
-	InsertionSort(data)
+	MergeSort(data)
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)
 	}
 }
 
-func TestInsertionSortWithEmptyInt(t *testing.T) {
+func TestMergeSortWithEmptyInt(t *testing.T) {
 	var data []int
 	var expected []int
 
-	InsertionSort(data)
+	MergeSort(data)
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)
 	}
 }
 
-func TestInsertionSortWithDuplicates(t *testing.T) {
+func TestMergeSortWithDuplicates(t *testing.T) {
 	data := []int{4, 2, 2, 8, 3, 3, 1}
 	expected := []int{1, 2, 2, 3, 3, 4, 8}
 
-	InsertionSort(data)
+	MergeSort(data)
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)
 	}
 }
 
-func TestInsertionSortWithAlreadySortedData(t *testing.T) {
+func TestMergeSortWithAlreadySortedData(t *testing.T) {
 	data := []int{1, 2, 3, 4, 5, 6}
 	expected := []int{1, 2, 3, 4, 5, 6}
 
-	InsertionSort(data)
+	MergeSort(data)
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)
 	}
 }
 
-func TestInsertionSortWithReverseSortedData(t *testing.T) {
+func TestMergeSortWithReverseSortedData(t *testing.T) {
 	data := []int{6, 5, 4, 3, 2, 1}
 	expected := []int{1, 2, 3, 4, 5, 6}
 
-	InsertionSort(data)
+	MergeSort(data)
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)
 	}
 }
 
-func TestInsertionSortWithMixedIntegers(t *testing.T) {
+func TestMergeSortWithMixedIntegers(t *testing.T) {
 	data := []int{-3, 5, -1, 0, 2, -2}
 	expected := []int{-3, -2, -1, 0, 2, 5}
 
-	InsertionSort(data)
+	MergeSort(data)
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)
 	}
 }
 
-func TestInsertionSortWithComparator(t *testing.T) {
+func TestMergeSortWithComparator(t *testing.T) {
 	bob := Person{Name: "Bob", Dob: time.Date(1985, time.March, 15, 0, 0, 0, 0, time.UTC)}
 	frank := Person{Name: "Frank", Dob: time.Date(1992, time.September, 25, 0, 0, 0, 0, time.UTC)}
 	alice := Person{Name: "Alice", Dob: time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC)}
@@ -98,7 +98,7 @@ func TestInsertionSortWithComparator(t *testing.T) {
 	data := []Person{bob, frank, alice, diana, charlie, eve}
 	expected := []Person{bob, eve, alice, frank, diana, charlie}
 
-	InsertionSortWithComparator(data, dobComparator)
+	MergeSortWithComparator(data, dobComparator)
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)
