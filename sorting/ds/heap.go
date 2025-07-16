@@ -1,16 +1,33 @@
 package ds
 
 import (
+	"github.com/lebruchette/algos/sorting"
 	"golang.org/x/exp/constraints"
 )
 
+type HeapType int
+
+const (
+	MinHeap HeapType = iota
+	MaxHeap
+)
+
 type Heap[T constraints.Ordered] struct {
-	data []T
+	data    []T
+	compare func(a, b T) bool
 }
 
 // NewHeap creates a new min-heap from the provided elements.
-func NewHeap[T constraints.Ordered](elements ...T) *Heap[T] {
-	heap := &Heap[T]{data: elements}
+func NewHeap[T constraints.Ordered](heapType HeapType, elements []T) *Heap[T] {
+	comparator := &sorting.DefaultComparator[T]{}
+	var comparison func(a, b T) bool
+	switch heapType {
+	case MinHeap:
+		comparison = comparator.LessThan
+	case MaxHeap:
+		comparison = comparator.GreaterThan
+	}
+	heap := &Heap[T]{data: elements, compare: comparison}
 	heap.Heapify()
 
 	return heap
@@ -57,7 +74,7 @@ func (h *Heap[T]) bubbleUp(i int) {
 	if i < 1 {
 		return
 	}
-	if h.data[i] < h.data[i/2] {
+	if h.compare(h.data[i], h.data[i/2]) || h.data[i] == h.data[i/2] {
 		h.data[i], h.data[i/2] = h.data[i/2], h.data[i]
 		h.bubbleUp(i / 2)
 	}
@@ -67,16 +84,32 @@ func (h *Heap[T]) bubbleUp(i int) {
 func (h *Heap[T]) bubbleDown(i int) {
 	smallest := i
 
-	if left(i) < h.size() && h.data[left(i)] < h.data[smallest] {
+	if left(i) < h.size() && h.compare(h.data[left(i)], h.data[smallest]) {
 		smallest = left(i)
 	}
-	if right(i) < h.size() && h.data[right(i)] < h.data[smallest] {
+
+	if right(i) < h.size() && h.compare(h.data[right(i)], h.data[smallest]) {
 		smallest = right(i)
 	}
 	if smallest != i {
 		h.data[i], h.data[smallest] = h.data[smallest], h.data[i]
 		h.bubbleDown(smallest)
 	}
+}
+
+// isValidHeap checks if the heap property is maintained for the entire heap.
+func (h *Heap[T]) IsValidHeap() bool {
+	for i := 0; i < h.size(); i++ {
+		leftIdx := left(i)
+		rightIdx := right(i)
+		if leftIdx < h.size() && h.compare(h.data[leftIdx], h.data[i]) {
+			return false
+		}
+		if rightIdx < h.size() && h.compare(h.data[rightIdx], h.data[i]) {
+			return false
+		}
+	}
+	return true
 }
 
 // returns the number of elements in the heap.
