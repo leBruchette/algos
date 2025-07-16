@@ -3,7 +3,6 @@ name: Unit Tests
 on:
   pull_request:
   workflow_dispatch:
-  push:
 
 jobs:
   unit-test:
