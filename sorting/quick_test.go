@@ -1,6 +1,7 @@
 package sorting
 
 import (
+	"github.com/lebruchette/algos/types"
 	"reflect"
 	"testing"
 	"time"
@@ -73,17 +74,17 @@ func TestQuickSortWithDuplicateElements(t *testing.T) {
 }
 
 func TestQuickSortWithCustomComparator(t *testing.T) {
-	bob := Person{Name: "Bob", Dob: time.Date(1985, time.March, 15, 0, 0, 0, 0, time.UTC)}
-	frank := Person{Name: "Frank", Dob: time.Date(1992, time.September, 25, 0, 0, 0, 0, time.UTC)}
-	alice := Person{Name: "Alice", Dob: time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC)}
-	diana := Person{Name: "Diana", Dob: time.Date(1995, time.December, 5, 0, 0, 0, 0, time.UTC)}
-	charlie := Person{Name: "Charlie", Dob: time.Date(2000, time.July, 20, 0, 0, 0, 0, time.UTC)}
-	eve := Person{Name: "Eve", Dob: time.Date(1988, time.April, 10, 0, 0, 0, 0, time.UTC)}
+	bob := types.Person{Name: "Bob", Dob: time.Date(1985, time.March, 15, 0, 0, 0, 0, time.UTC)}
+	frank := types.Person{Name: "Frank", Dob: time.Date(1992, time.September, 25, 0, 0, 0, 0, time.UTC)}
+	alice := types.Person{Name: "Alice", Dob: time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC)}
+	diana := types.Person{Name: "Diana", Dob: time.Date(1995, time.December, 5, 0, 0, 0, 0, time.UTC)}
+	charlie := types.Person{Name: "Charlie", Dob: time.Date(2000, time.July, 20, 0, 0, 0, 0, time.UTC)}
+	eve := types.Person{Name: "Eve", Dob: time.Date(1988, time.April, 10, 0, 0, 0, 0, time.UTC)}
 
-	data := []Person{bob, frank, alice, diana, charlie, eve}
-	expected := []Person{bob, eve, alice, frank, diana, charlie}
+	data := []types.Person{bob, frank, alice, diana, charlie, eve}
+	expected := []types.Person{bob, eve, alice, frank, diana, charlie}
 
-	QuickSortWithComparator(data, &PersonComparator{})
+	QuickSortWithComparator(data, &types.PersonComparator{})
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)
@@ -91,14 +92,14 @@ func TestQuickSortWithCustomComparator(t *testing.T) {
 }
 
 func TestQuickSortWithAlreadySortedCustomObjects(t *testing.T) {
-	alice := Person{Name: "Alice", Dob: time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC)}
-	bob := Person{Name: "Bob", Dob: time.Date(1985, time.March, 15, 0, 0, 0, 0, time.UTC)}
-	charlie := Person{Name: "Charlie", Dob: time.Date(2000, time.July, 20, 0, 0, 0, 0, time.UTC)}
+	alice := types.Person{Name: "Alice", Dob: time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC)}
+	bob := types.Person{Name: "Bob", Dob: time.Date(1985, time.March, 15, 0, 0, 0, 0, time.UTC)}
+	charlie := types.Person{Name: "Charlie", Dob: time.Date(2000, time.July, 20, 0, 0, 0, 0, time.UTC)}
 
-	data := []Person{bob, alice, charlie}
-	expected := []Person{bob, alice, charlie}
+	data := []types.Person{bob, alice, charlie}
+	expected := []types.Person{bob, alice, charlie}
 
-	QuickSortWithComparator(data, &PersonComparator{})
+	QuickSortWithComparator(data, &types.PersonComparator{})
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)
@@ -106,14 +107,14 @@ func TestQuickSortWithAlreadySortedCustomObjects(t *testing.T) {
 }
 
 func TestQuickSortWithReverseOrderedCustomObjects(t *testing.T) {
-	alice := Person{Name: "Alice", Dob: time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC)}
-	bob := Person{Name: "Bob", Dob: time.Date(1985, time.March, 15, 0, 0, 0, 0, time.UTC)}
-	charlie := Person{Name: "Charlie", Dob: time.Date(2000, time.July, 20, 0, 0, 0, 0, time.UTC)}
+	alice := types.Person{Name: "Alice", Dob: time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC)}
+	bob := types.Person{Name: "Bob", Dob: time.Date(1985, time.March, 15, 0, 0, 0, 0, time.UTC)}
+	charlie := types.Person{Name: "Charlie", Dob: time.Date(2000, time.July, 20, 0, 0, 0, 0, time.UTC)}
 
-	data := []Person{charlie, alice, bob}
-	expected := []Person{bob, alice, charlie}
+	data := []types.Person{charlie, alice, bob}
+	expected := []types.Person{bob, alice, charlie}
 
-	QuickSortWithComparator(data, &PersonComparator{})
+	QuickSortWithComparator(data, &types.PersonComparator{})
 
 	if !reflect.DeepEqual(data, expected) {
 		t.Errorf("Expected %v, but got %v", expected, data)

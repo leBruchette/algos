@@ -1,6 +1,6 @@
 # `sorting` Package
 
-The `sorting` package provides various implementations for sorting slices of data in Go. More specifically: 
+The `sorting` package provides various implementations for sorting slices of Data in Go. More specifically: 
 - **Generic Sorting**: Sort slices of any type that satisfies the `constraints.Ordered` interface (e.g., integers, floats, strings).
 - **Custom Comparator Support**: Sort slices of any type using a user-defined comparator function.
 - **Stable Sorting**: Maintains the relative order of equal elements.
@@ -10,17 +10,17 @@ The `sorting` package provides various implementations for sorting slices of dat
 Sorts a slice of ordered types in ascending order using insertion sort.
 
 ```go
-func InsertionSort[T constraints.Ordered](data []T)
+func InsertionSort[T constraints.Ordered](Data []T)
 ```
 
 #### Parameters:
-- `data`: A slice of any type that satisfies `constraints.Ordered`.
+- `Data`: A slice of any type that satisfies `constraints.Ordered`.
 
 #### Example:
 ```go
-data := []int{5, 2, 9, 1, 5, 6}
-sorting.InsertionSort(data)
-// data is now: []int{1, 2, 5, 5, 6, 9}
+Data := []int{5, 2, 9, 1, 5, 6}
+sorting.InsertionSort(Data)
+// Data is now: []int{1, 2, 5, 5, 6, 9}
 ```
 
 ---
@@ -29,11 +29,11 @@ sorting.InsertionSort(data)
 Sorts a slice of any type using a custom comparator type.  This type must implement the interface `Comparator`
 
 ```go
-func InsertionSortWithComparator[T any](data []T, comparator Comparator[T])
+func InsertionSortWithComparator[T any](Data []T, comparator Comparator[T])
 ```
 
 #### Parameters:
-- `data`: A slice of any type.
+- `Data`: A slice of any type.
 - `comparator`: A function that defines comparison logic via `Comparator`. 
 
 #### Example:
@@ -43,7 +43,7 @@ type Person struct {
     Dob  time.Time
 }
 
-data := []Person{
+Data := []Person{
     {Name: "Bob", Dob: time.Date(1985, time.March, 15, 0, 0, 0, 0, time.UTC)}
     {Name: "Frank", Dob: time.Date(1992, time.September, 25, 0, 0, 0, 0, time.UTC)}
     {Name: "Alice", Dob: time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC)}
@@ -62,8 +62,8 @@ func (ac AgeComparator) GreaterThan(a, b Person) bool { return a.Dob.After(b.Dob
 func (ac AgeComparator) LessThan(a, b Person) bool    { return a.Dob.Before(b.Dob) }
 func (ac AgeComparator) EqualTo(a, b Person) bool     { return a.Dob.Equal(b.Dob) }
 
-// data is now sorted by age in ascending order
-sorting.InsertionSortWithComparator(data, AgeComparator{})
+// Data is now sorted by age in ascending order
+sorting.InsertionSortWithComparator(Data, AgeComparator{})
 
 ```
 
@@ -73,17 +73,17 @@ sorting.InsertionSortWithComparator(data, AgeComparator{})
 Sorts a slice of ordered types in ascending order using merge sort.
 
 ```go
-func MergeSort[T constraints.Ordered](data []T)
+func MergeSort[T constraints.Ordered](Data []T)
 ```
 
 #### Parameters:
-- `data`: A slice of any type that satisfies `constraints.Ordered`.
+- `Data`: A slice of any type that satisfies `constraints.Ordered`.
 
 #### Example:
 ```go
-data := []int{5, 2, 9, 1, 5, 6}
-sorting.MergeSort(data)
-// data is now: []int{1, 2, 5, 5, 6, 9}
+Data := []int{5, 2, 9, 1, 5, 6}
+sorting.MergeSort(Data)
+// Data is now: []int{1, 2, 5, 5, 6, 9}
 ```
 
 ---
@@ -92,11 +92,11 @@ sorting.MergeSort(data)
 Sorts a slice of any type using a custom comparator type.  This type must implement the interface `Comparator`
 
 ```go
-func MergeSortWithComparator[T any](data []T, comparator Comparator[T])
+func MergeSortWithComparator[T any](Data []T, comparator Comparator[T])
 ```
 
 #### Parameters:
-- `data`: A slice of any type.
+- `Data`: A slice of any type.
 - `comparator`: A function that defines comparison logic via `Comparator`.
 
 #### Example:
@@ -106,7 +106,7 @@ type Person struct {
     Dob  time.Time
 }
 
-data := []Person{
+Data := []Person{
     {Name: "Bob", Dob: time.Date(1985, time.March, 15, 0, 0, 0, 0, time.UTC)}
     {Name: "Frank", Dob: time.Date(1992, time.September, 25, 0, 0, 0, 0, time.UTC)}
     {Name: "Alice", Dob: time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC)}
@@ -125,8 +125,8 @@ func (ac AgeComparator) GreaterThan(a, b Person) bool { return a.Dob.After(b.Dob
 func (ac AgeComparator) LessThan(a, b Person) bool    { return a.Dob.Before(b.Dob) }
 func (ac AgeComparator) EqualTo(a, b Person) bool     { return a.Dob.Equal(b.Dob) }
 
-// data is now sorted by age in ascending order
-sorting.MergeSortWithComparator(data, AgeComparator{})
+// Data is now sorted by age in ascending order
+sorting.MergeSortWithComparator(Data, AgeComparator{})
 
 ```
 
@@ -136,17 +136,17 @@ sorting.MergeSortWithComparator(data, AgeComparator{})
 Sorts a slice of ordered types in ascending order using insertion sort.
 
 ```go
-func QuickSort[T constraints.Ordered](data []T)
+func QuickSort[T constraints.Ordered](Data []T)
 ```
 
 #### Parameters:
-- `data`: A slice of any type that satisfies `constraints.Ordered`.
+- `Data`: A slice of any type that satisfies `constraints.Ordered`.
 
 #### Example:
 ```go
-data := []int{5, 2, 9, 1, 5, 6}
-sorting.InsertionSort(data)
-// data is now: []int{1, 2, 5, 5, 6, 9}
+Data := []int{5, 2, 9, 1, 5, 6}
+sorting.InsertionSort(Data)
+// Data is now: []int{1, 2, 5, 5, 6, 9}
 ```
 
 ---
@@ -155,11 +155,11 @@ sorting.InsertionSort(data)
 Sorts a slice of any type using a custom comparator type.  This type must implement the interface `Comparator`
 
 ```go
-func QuickSortWithComparator[T any](data []T, comparator Comparator[T])
+func QuickSortWithComparator[T any](Data []T, comparator Comparator[T])
 ```
 
 #### Parameters:
-- `data`: A slice of any type.
+- `Data`: A slice of any type.
 - `comparator`: A function that defines comparison logic via `Comparator`.
 
 #### Example:
@@ -169,7 +169,7 @@ type Person struct {
     Dob  time.Time
 }
 
-data := []Person{
+Data := []Person{
     {Name: "Bob", Dob: time.Date(1985, time.March, 15, 0, 0, 0, 0, time.UTC)}
     {Name: "Frank", Dob: time.Date(1992, time.September, 25, 0, 0, 0, 0, time.UTC)}
     {Name: "Alice", Dob: time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC)}
@@ -188,8 +188,8 @@ func (ac AgeComparator) GreaterThan(a, b Person) bool { return a.Dob.After(b.Dob
 func (ac AgeComparator) LessThan(a, b Person) bool    { return a.Dob.Before(b.Dob) }
 func (ac AgeComparator) EqualTo(a, b Person) bool     { return a.Dob.Equal(b.Dob) }
 
-// data is now sorted by age in ascending order
-sorting.QuickSortWithComparator(data, AgeComparator{})
+// Data is now sorted by age in ascending order
+sorting.QuickSortWithComparator(Data, AgeComparator{})
 
 ```
 

@@ -1,7 +1,6 @@
-package ds
+package types
 
 import (
-	"github.com/lebruchette/algos/sorting"
 	"golang.org/x/exp/constraints"
 )
 
@@ -13,13 +12,13 @@ const (
 )
 
 type Heap[T constraints.Ordered] struct {
-	data    []T
+	Data    []T
 	compare func(a, b T) bool
 }
 
 // NewHeap creates a new min-heap from the provided elements.
 func NewHeap[T constraints.Ordered](heapType HeapType, elements []T) *Heap[T] {
-	comparator := &sorting.DefaultComparator[T]{}
+	comparator := &DefaultComparator[T]{}
 	var comparison func(a, b T) bool
 	switch heapType {
 	case MinHeap:
@@ -27,7 +26,7 @@ func NewHeap[T constraints.Ordered](heapType HeapType, elements []T) *Heap[T] {
 	case MaxHeap:
 		comparison = comparator.GreaterThan
 	}
-	heap := &Heap[T]{data: elements, compare: comparison}
+	heap := &Heap[T]{Data: elements, compare: comparison}
 	heap.Heapify()
 
 	return heap
@@ -35,7 +34,7 @@ func NewHeap[T constraints.Ordered](heapType HeapType, elements []T) *Heap[T] {
 
 // Insert adds a new item to the heap and maintains the heap property.
 func (h *Heap[T]) Insert(item T) {
-	h.data = append(h.data, item)
+	h.Data = append(h.Data, item)
 	h.bubbleUp(h.size() - 1)
 }
 
@@ -47,25 +46,32 @@ func (h *Heap[T]) Delete(i int) {
 	}
 	// edge case: handle deleting from a single-element heap
 	if h.size() == 1 && i == 0 {
-		h.data = []T{}
+		h.Data = []T{}
 		return
 	}
 	// the element to delete is already at the end, simply resize
 	if i == h.size()-1 {
-		h.data = h.data[:h.size()-1]
+		h.Data = h.Data[:h.size()-1]
 		return
 	} else {
 		// otherwise move the element to delete to the end, resize and bubbleDown
-		h.data[i], h.data[h.size()-1] = h.data[h.size()-1], h.data[i]
-		h.data = h.data[:h.size()-1]
+		h.Data[i], h.Data[h.size()-1] = h.Data[h.size()-1], h.Data[i]
+		h.Data = h.Data[:h.size()-1]
 		h.bubbleDown(i)
 	}
 }
 
-// Heapify builds the heap from the initial data slice.
+// Heapify builds the heap from the initial Data slice.
 func (h *Heap[T]) Heapify() {
 	for i := h.size() / 2; i >= 0; i-- {
 		h.bubbleDown(i)
+	}
+}
+
+// HeapifyToIndex builds the heap from the initial Data slice, considering elements up to maxIdx.
+func (h *Heap[T]) HeapifyToIndex(maxIdx int) {
+	for i := maxIdx; i >= 0; i-- {
+		h.bubbleDownToIndex(i, maxIdx)
 	}
 }
 
@@ -74,8 +80,8 @@ func (h *Heap[T]) bubbleUp(i int) {
 	if i < 1 {
 		return
 	}
-	if h.compare(h.data[i], h.data[i/2]) || h.data[i] == h.data[i/2] {
-		h.data[i], h.data[i/2] = h.data[i/2], h.data[i]
+	if h.compare(h.Data[i], h.Data[i/2]) || h.Data[i] == h.Data[i/2] {
+		h.Data[i], h.Data[i/2] = h.Data[i/2], h.Data[i]
 		h.bubbleUp(i / 2)
 	}
 }
@@ -84,16 +90,35 @@ func (h *Heap[T]) bubbleUp(i int) {
 func (h *Heap[T]) bubbleDown(i int) {
 	smallest := i
 
-	if left(i) < h.size() && h.compare(h.data[left(i)], h.data[smallest]) {
+	if left(i) < h.size() && h.compare(h.Data[left(i)], h.Data[smallest]) {
 		smallest = left(i)
 	}
 
-	if right(i) < h.size() && h.compare(h.data[right(i)], h.data[smallest]) {
+	if right(i) < h.size() && h.compare(h.Data[right(i)], h.Data[smallest]) {
 		smallest = right(i)
 	}
+
 	if smallest != i {
-		h.data[i], h.data[smallest] = h.data[smallest], h.data[i]
+		h.Data[i], h.Data[smallest] = h.Data[smallest], h.Data[i]
 		h.bubbleDown(smallest)
+	}
+}
+
+// bubbleDownToIndex restores the heap property by moving the element at index i down, considering elements up to maxIdx.
+func (h *Heap[T]) bubbleDownToIndex(i int, maxIdx int) {
+	smallest := i
+
+	if left(i) < maxIdx && h.compare(h.Data[left(i)], h.Data[smallest]) {
+		smallest = left(i)
+	}
+
+	if right(i) < maxIdx && h.compare(h.Data[right(i)], h.Data[smallest]) {
+		smallest = right(i)
+	}
+
+	if smallest != i {
+		h.Data[i], h.Data[smallest] = h.Data[smallest], h.Data[i]
+		h.bubbleDownToIndex(smallest, maxIdx)
 	}
 }
 
@@ -102,10 +127,10 @@ func (h *Heap[T]) IsValidHeap() bool {
 	for i := 0; i < h.size(); i++ {
 		leftIdx := left(i)
 		rightIdx := right(i)
-		if leftIdx < h.size() && h.compare(h.data[leftIdx], h.data[i]) {
+		if leftIdx < h.size() && h.compare(h.Data[leftIdx], h.Data[i]) {
 			return false
 		}
-		if rightIdx < h.size() && h.compare(h.data[rightIdx], h.data[i]) {
+		if rightIdx < h.size() && h.compare(h.Data[rightIdx], h.Data[i]) {
 			return false
 		}
 	}
@@ -114,7 +139,7 @@ func (h *Heap[T]) IsValidHeap() bool {
 
 // returns the number of elements in the heap.
 func (h *Heap[T]) size() int {
-	return len(h.data)
+	return len(h.Data)
 }
 
 // returns left child for a given index, converting from 0 to 1 based indexing
