@@ -20,20 +20,27 @@ plt.switch_backend('Agg')
 sns.set_style("whitegrid")
 
 class BenchmarkParser:
-    def __init__(self, benchmark_file="benchmark-results/benchmark_output.txt"):
+    def __init__(self, benchmark_file=None):
+        if benchmark_file is None:
+            benchmark_file = os.path.join(os.getcwd(), "benchmark-results", "benchmark_output.txt")
         self.benchmark_file = benchmark_file
         self.results = []
         
     def parse_benchmark_output(self):
         """Parse Go benchmark output into structured data."""
-        benchmark_pattern = r'Benchmark(\w+)-(\d+)\s+(\d+)\s+([\d.]+)\s+ns/op(?:\s+([\d.]+)\s+B/op)?(?:\s+([\d.]+)\s+allocs/op)?'
+
+
+#         benchmark_pattern = r'Benchmark(\w+)-(\d+)\s+(\d+)\s+([\d.]+)\s+ns/op(?:\s+([\d.]+)\s+B/op)?(?:\s+([\d.]+)\s+allocs/op)?'
+        benchmark_pattern = r'Benchmark([\w/]+)-(\d+)\s+(\d+)\s+([\d.]+)\s+ns/op(?:\s+([\d.]+)\s+B/op)?(?:\s+([\d.]+)\s+allocs/op)?'
         
         with open(self.benchmark_file, 'r') as f:
             content = f.read()
-            
+
+        print(content)  # Print the benchmark file content to the console
         matches = re.findall(benchmark_pattern, content)
         
         for match in matches:
+            print(match)
             benchmark_name, cpus, iterations, ns_per_op, bytes_per_op, allocs_per_op = match
             
             result = {
