@@ -56,7 +56,7 @@ jobs:
         python scripts/plot_benchmarks.py
         
     - name: Upload benchmark plots
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: benchmark-plots-${{ github.sha }}
         path: benchmark-results/plots/
