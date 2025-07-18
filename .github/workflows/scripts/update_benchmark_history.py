@@ -211,10 +211,10 @@ class BenchmarkHistoryTracker:
 #             total_previous = sum(r['ns_per_op'] for r in previous_run['results'].values()
 #                                if r in latest_run['results'])
 #
-            if total_previous > 0:
-                overall_change = ((total_current - total_previous) / total_previous) * 100
-                trend_emoji = "📈" if overall_change > 0 else "📉"
-                report_lines.append(f"- **Overall Trend:** {trend_emoji} {overall_change:+.1f}%")
+#             if total_previous > 0:
+#                 overall_change = ((total_current - total_previous) / total_previous) * 100
+#                 trend_emoji = "📈" if overall_change > 0 else "📉"
+#                 report_lines.append(f"- **Overall Trend:** {trend_emoji} {overall_change:+.1f}%")
         
         report_lines.append("\n## Generated Charts\n")
         report_lines.append("- [Performance Trends](performance_trends.png)")
