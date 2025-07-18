@@ -106,6 +106,113 @@
           "run_count": 3
         }
       }
+    },
+    {
+      "timestamp": "2025-07-18T17:45:34.016761",
+      "commit": "cc1eb1c3",
+      "ref": "refs/heads/main",
+      "results": {
+        "GolangSort/100": {
+          "name": "GolangSort/100",
+          "cpus": 4,
+          "iterations": 11852579,
+          "ns_per_op": 101.0,
+          "bytes_per_op": 0.0,
+          "allocs_per_op": 0.0,
+          "timestamp": "2025-07-18T17:45:31.477006",
+          "run_count": 3
+        },
+        "GolangSort/1000": {
+          "name": "GolangSort/1000",
+          "cpus": 4,
+          "iterations": 1809082,
+          "ns_per_op": 663.6666666666666,
+          "bytes_per_op": 0.0,
+          "allocs_per_op": 0.0,
+          "timestamp": "2025-07-18T17:45:31.477025",
+          "run_count": 3
+        },
+        "InsertionSort/100": {
+          "name": "InsertionSort/100",
+          "cpus": 4,
+          "iterations": 3762598,
+          "ns_per_op": 319.23333333333335,
+          "bytes_per_op": 0.0,
+          "allocs_per_op": 0.0,
+          "timestamp": "2025-07-18T17:45:31.477035",
+          "run_count": 3
+        },
+        "InsertionSort/1000": {
+          "name": "InsertionSort/1000",
+          "cpus": 4,
+          "iterations": 375941,
+          "ns_per_op": 3130.6666666666665,
+          "bytes_per_op": 0.0,
+          "allocs_per_op": 0.0,
+          "timestamp": "2025-07-18T17:45:31.477048",
+          "run_count": 3
+        },
+        "MergeSort/100": {
+          "name": "MergeSort/100",
+          "cpus": 4,
+          "iterations": 110748,
+          "ns_per_op": 10692.333333333334,
+          "bytes_per_op": 11784.0,
+          "allocs_per_op": 246.0,
+          "timestamp": "2025-07-18T17:45:31.477057",
+          "run_count": 3
+        },
+        "MergeSort/1000": {
+          "name": "MergeSort/1000",
+          "cpus": 4,
+          "iterations": 10108,
+          "ns_per_op": 110308.33333333333,
+          "bytes_per_op": 152201.0,
+          "allocs_per_op": 2036.0,
+          "timestamp": "2025-07-18T17:45:31.477066",
+          "run_count": 3
+        },
+        "QuickSort/100": {
+          "name": "QuickSort/100",
+          "cpus": 4,
+          "iterations": 88164,
+          "ns_per_op": 13443.0,
+          "bytes_per_op": 14528.0,
+          "allocs_per_op": 322.3333333333333,
+          "timestamp": "2025-07-18T17:45:31.477075",
+          "run_count": 3
+        },
+        "QuickSort/1000": {
+          "name": "QuickSort/1000",
+          "cpus": 4,
+          "iterations": 6309,
+          "ns_per_op": 173082.0,
+          "bytes_per_op": 212699.66666666666,
+          "allocs_per_op": 3234.0,
+          "timestamp": "2025-07-18T17:45:31.477083",
+          "run_count": 3
+        },
+        "HeapSort/100": {
+          "name": "HeapSort/100",
+          "cpus": 4,
+          "iterations": 41332,
+          "ns_per_op": 28671.666666666668,
+          "bytes_per_op": 48.0,
+          "allocs_per_op": 2.0,
+          "timestamp": "2025-07-18T17:45:31.477091",
+          "run_count": 3
+        },
+        "HeapSort/1000": {
+          "name": "HeapSort/1000",
+          "cpus": 4,
+          "iterations": 508,
+          "ns_per_op": 2355171.0,
+          "bytes_per_op": 64.0,
+          "allocs_per_op": 2.0,
+          "timestamp": "2025-07-18T17:45:31.477100",
+          "run_count": 3
+        }
+      }
     }
   ]
 }
